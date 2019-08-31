@@ -1,11 +1,11 @@
 #ifndef GODOT_CHIPMUNK_BODY_H
 #define GODOT_CHIPMUNK_BODY_H
 
-#include <object.h>
+#include <core/object.h>
 
 class ChipmunkBody : public Object
 {
-    OBJ_TYPE(ChipmunkBody, Object);
+    GDCLASS(ChipmunkBody, Object);
 public:
     /** Lifecycle */
     ChipmunkBody();

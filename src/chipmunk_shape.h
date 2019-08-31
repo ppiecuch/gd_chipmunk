@@ -1,11 +1,11 @@
 #ifndef GODOT_CHIPMUNK_SHAPE_H
 #define GODOT_CHIPMUNK_SHAPE_H
 
-#include <object.h>
+#include <core/object.h>
 
 class ChipmunkShape : public Object
 {
-    OBJ_TYPE(ChipmunkShape, Object);
+    GDCLASS(ChipmunkShape, Object);
 protected:
     /** Abstract class */
     ChipmunkShape(cpShape*);
@@ -17,7 +17,7 @@ public:
 
     /** Chipmunk methods */
     Rect2 cache_bb();
-    Rect2 update(const Matrix32&);
+    Rect2 update(const Transform2D&);
     Rect2 get_bb() const;
 
     Dictionary point_query(const Vector2&) const;
@@ -73,13 +73,13 @@ public:
 
 class ChipmunkShapeFactory : public Reference
 {
-    OBJ_TYPE(ChipmunkShapeFactory, Reference);
+    GDCLASS(ChipmunkShapeFactory, Reference);
 public:
     /** Factory methods */
     ChipmunkShape *circle(ChipmunkBody *body, float radius, const Vector2 &offset);
     ChipmunkShape *segment(ChipmunkBody *body, const Vector2 &a, const Vector2 &b, float radius);
     ChipmunkShape *box(ChipmunkBody *body, const Rect2 &box, float radius);
-    ChipmunkShape *poly(ChipmunkBody *body, const Vector2Array &verts, float radius);
+    ChipmunkShape *poly(ChipmunkBody *body, const PoolVector2Array &verts, float radius);
 
 protected:
     /** Godot bindings */

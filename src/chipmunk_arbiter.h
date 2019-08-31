@@ -1,11 +1,11 @@
 #ifndef GODOT_CHIPMUNK_ARBITER_H
 #define GODOT_CHIPMUNK_ARBITER_H
 
-#include <reference.h>
+#include <core/reference.h>
 
 class ChipmunkArbiter : public Reference
 {
-    OBJ_TYPE(ChipmunkArbiter, Reference);
+    GDCLASS(ChipmunkArbiter, Reference);
 public:
     /** Wrap Chipmunk data */
     ChipmunkArbiter(cpArbiter*);

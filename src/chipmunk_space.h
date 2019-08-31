@@ -1,12 +1,12 @@
 #ifndef GODOT_CHIPMUNK_SPACE_H
 #define GODOT_CHIPMUNK_SPACE_H
 
-#include <hash_map.h>
-#include <object.h>
+#include <core/hash_map.h>
+#include <core/object.h>
 
 class ChipmunkSpace : public Object
 {
-    OBJ_TYPE(ChipmunkSpace, Object);
+    GDCLASS(ChipmunkSpace, Object);
 public:
     /** Lifecycle */
     ChipmunkSpace();

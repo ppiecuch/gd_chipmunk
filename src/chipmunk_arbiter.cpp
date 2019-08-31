@@ -79,13 +79,13 @@ ChipmunkBody *ChipmunkArbiter::get_body_b() const
 Dictionary ChipmunkArbiter::get_contact_point_set() const
 {
     auto set = cpArbiterGetContactPointSet(arbiter);
-    Dictionary r(true);
+    Dictionary r;
     r["count"] = set.count;
     r["normal"] = GD(set.normal);
     Array points;
     for (int i = 0; i < set.count; ++i)
     {
-        Dictionary r(true);
+        Dictionary r;
         r["pointA"] = GD(set.points[i].pointA);
         r["pointB"] = GD(set.points[i].pointB);
         r["distance"] = set.points[i].distance;
@@ -107,31 +107,31 @@ bool ChipmunkArbiter::is_removal() const
 
 void ChipmunkArbiter::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("get_restitution:real"), &ChipmunkArbiter::get_restitution);
-    ObjectTypeDB::bind_method(_MD("set_restitution", "restitution:real"), &ChipmunkArbiter::set_restitution);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "restitution"), _SCS("set_restitution"), _SCS("get_restitution"));
+    ClassDB::bind_method(D_METHOD("get_restitution"), &ChipmunkArbiter::get_restitution);
+    ClassDB::bind_method(D_METHOD("set_restitution", "restitution:float"), &ChipmunkArbiter::set_restitution);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "restitution"), "set_restitution", "get_restitution");
 
-    ObjectTypeDB::bind_method(_MD("get_friction:real"), &ChipmunkArbiter::get_friction);
-    ObjectTypeDB::bind_method(_MD("set_friction", "friction:real"), &ChipmunkArbiter::set_friction);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "friction"), _SCS("set_friction"), _SCS("get_friction"));
+    ClassDB::bind_method(D_METHOD("get_friction"), &ChipmunkArbiter::get_friction);
+    ClassDB::bind_method(D_METHOD("set_friction", "friction:float"), &ChipmunkArbiter::set_friction);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "friction"), "set_friction", "get_friction");
 
-    ObjectTypeDB::bind_method(_MD("get_surface_velocity:Vector2"), &ChipmunkArbiter::get_surface_velocity);
-    ObjectTypeDB::bind_method(_MD("set_surface_velocity", "velocity:Vector2"), &ChipmunkArbiter::set_surface_velocity);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "surface_velocity"), _SCS("set_surface_velocity"), _SCS("get_surface_velocity"));
+    ClassDB::bind_method(D_METHOD("get_surface_velocity"), &ChipmunkArbiter::get_surface_velocity);
+    ClassDB::bind_method(D_METHOD("set_surface_velocity", "velocity"), &ChipmunkArbiter::set_surface_velocity);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "surface_velocity"), "set_surface_velocity", "get_surface_velocity");
 
-    ObjectTypeDB::bind_method(_MD("get_total_impulse:Vector2"), &ChipmunkArbiter::get_total_impulse);
-    ObjectTypeDB::bind_method(_MD("get_total_kinetic_energy:real"), &ChipmunkArbiter::get_total_kinetic_energy);
+    ClassDB::bind_method(D_METHOD("get_total_impulse:Vector2"), &ChipmunkArbiter::get_total_impulse);
+    ClassDB::bind_method(D_METHOD("get_total_kinetic_energy:float"), &ChipmunkArbiter::get_total_kinetic_energy);
 
-    ObjectTypeDB::bind_method(_MD("ignore:bool"), &ChipmunkArbiter::ignore);
+    ClassDB::bind_method(D_METHOD("ignore:bool"), &ChipmunkArbiter::ignore);
 
-    ObjectTypeDB::bind_method(_MD("get_shape_a:ChipmunkShape"), &ChipmunkArbiter::get_shape_a);
-    ObjectTypeDB::bind_method(_MD("get_shape_b:ChipmunkShape"), &ChipmunkArbiter::get_shape_b);
+    ClassDB::bind_method(D_METHOD("get_shape_a:ChipmunkShape"), &ChipmunkArbiter::get_shape_a);
+    ClassDB::bind_method(D_METHOD("get_shape_b:ChipmunkShape"), &ChipmunkArbiter::get_shape_b);
 
-    ObjectTypeDB::bind_method(_MD("get_body_a:ChipmunkBody"), &ChipmunkArbiter::get_body_a);
-    ObjectTypeDB::bind_method(_MD("get_body_b:ChipmunkBody"), &ChipmunkArbiter::get_body_b);
+    ClassDB::bind_method(D_METHOD("get_body_a:ChipmunkBody"), &ChipmunkArbiter::get_body_a);
+    ClassDB::bind_method(D_METHOD("get_body_b:ChipmunkBody"), &ChipmunkArbiter::get_body_b);
 
-    ObjectTypeDB::bind_method(_MD("get_contact_point_set:Dictionary"), &ChipmunkArbiter::get_contact_point_set);
+    ClassDB::bind_method(D_METHOD("get_contact_point_set:Dictionary"), &ChipmunkArbiter::get_contact_point_set);
 
-    ObjectTypeDB::bind_method(_MD("is_first_contact:bool"), &ChipmunkArbiter::is_first_contact);
-    ObjectTypeDB::bind_method(_MD("is_removal:bool"), &ChipmunkArbiter::is_removal);
+    ClassDB::bind_method(D_METHOD("is_first_contact:bool"), &ChipmunkArbiter::is_first_contact);
+    ClassDB::bind_method(D_METHOD("is_removal:bool"), &ChipmunkArbiter::is_removal);
 }

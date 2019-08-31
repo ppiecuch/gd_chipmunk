@@ -40,17 +40,17 @@ void ChipmunkPinJoint::set_dist(float value)
 
 void ChipmunkPinJoint::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("get_anchor_a"), &ChipmunkPinJoint::get_anchor_a);
-    ObjectTypeDB::bind_method(_MD("set_anchor_a", "anchor:Vector2"), &ChipmunkPinJoint::set_anchor_a);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_a"), _SCS("set_anchor_a"), _SCS("get_anchor_a"));
+    ClassDB::bind_method(D_METHOD("get_anchor_a"), &ChipmunkPinJoint::get_anchor_a);
+    ClassDB::bind_method(D_METHOD("set_anchor_a", "anchor"), &ChipmunkPinJoint::set_anchor_a);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_a"), "set_anchor_a", "get_anchor_a");
 
-    ObjectTypeDB::bind_method(_MD("get_anchor_b"), &ChipmunkPinJoint::get_anchor_b);
-    ObjectTypeDB::bind_method(_MD("set_anchor_b", "anchor:Vector2"), &ChipmunkPinJoint::set_anchor_b);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_b"), _SCS("set_anchor_b"), _SCS("get_anchor_b"));
+    ClassDB::bind_method(D_METHOD("get_anchor_b"), &ChipmunkPinJoint::get_anchor_b);
+    ClassDB::bind_method(D_METHOD("set_anchor_b", "anchor"), &ChipmunkPinJoint::set_anchor_b);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_b"), "set_anchor_b", "get_anchor_b");
 
-    ObjectTypeDB::bind_method(_MD("get_dist"), &ChipmunkPinJoint::get_dist);
-    ObjectTypeDB::bind_method(_MD("set_dist", "dist:real"), &ChipmunkPinJoint::set_dist);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "dist"), _SCS("set_dist"), _SCS("get_dist"));
+    ClassDB::bind_method(D_METHOD("get_dist"), &ChipmunkPinJoint::get_dist);
+    ClassDB::bind_method(D_METHOD("set_dist", "dist"), &ChipmunkPinJoint::set_dist);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "dist"), "set_dist", "get_dist");
 }
 
 ChipmunkPinJoint *ChipmunkConstraintFactory::pin_joint(ChipmunkBody *body_a, ChipmunkBody *body_b, const Vector2 &anchor_a, const Vector2 &anchor_b)

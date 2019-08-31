@@ -67,7 +67,7 @@ void ChipmunkCollisionHandler::set_begin_func(Object *receiver, const StringName
     if (receiver)
     {
         begin_cb = memnew(ChipmunkCallbackBinding);
-        begin_cb->id = receiver->get_instance_ID();
+        begin_cb->id = receiver->get_instance_id();
         begin_cb->method = method;
         handler->beginFunc = &BeginFunc;
     }
@@ -81,7 +81,7 @@ void ChipmunkCollisionHandler::set_pre_solve_func(Object *receiver, const String
     if (receiver)
     {
         pre_solve_cb = memnew(ChipmunkCallbackBinding);
-        pre_solve_cb->id = receiver->get_instance_ID();
+        pre_solve_cb->id = receiver->get_instance_id();
         pre_solve_cb->method = method;
         handler->preSolveFunc = &PreSolveFunc;
     }
@@ -95,7 +95,7 @@ void ChipmunkCollisionHandler::set_post_solve_func(Object *receiver, const Strin
     if (receiver)
     {
         post_solve_cb = memnew(ChipmunkCallbackBinding);
-        post_solve_cb->id = receiver->get_instance_ID();
+        post_solve_cb->id = receiver->get_instance_id();
         post_solve_cb->method = method;
         handler->postSolveFunc = &PostSolveFunc;
     }
@@ -109,7 +109,7 @@ void ChipmunkCollisionHandler::set_separate_func(Object *receiver, const StringN
     if (receiver)
     {
         separate_cb = memnew(ChipmunkCallbackBinding);
-        separate_cb->id = receiver->get_instance_ID();
+        separate_cb->id = receiver->get_instance_id();
         separate_cb->method = method;
         handler->separateFunc = &SeparateFunc;
     }
@@ -117,15 +117,15 @@ void ChipmunkCollisionHandler::set_separate_func(Object *receiver, const StringN
 
 void ChipmunkCollisionHandler::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("get_space:ChipmunkSpace"), &ChipmunkCollisionHandler::get_space);
+    ClassDB::bind_method(D_METHOD("get_space:ChipmunkSpace"), &ChipmunkCollisionHandler::get_space);
 
-    ObjectTypeDB::bind_method(_MD("get_collision_type_a:int"), &ChipmunkCollisionHandler::get_collision_type_a);
-    ObjectTypeDB::bind_method(_MD("get_collision_type_b:int"), &ChipmunkCollisionHandler::get_collision_type_b);
+    ClassDB::bind_method(D_METHOD("get_collision_type_a:int"), &ChipmunkCollisionHandler::get_collision_type_a);
+    ClassDB::bind_method(D_METHOD("get_collision_type_b:int"), &ChipmunkCollisionHandler::get_collision_type_b);
 
-    ObjectTypeDB::bind_method(_MD("set_begin_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_begin_func);
-    ObjectTypeDB::bind_method(_MD("set_pre_solve_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_pre_solve_func);
-    ObjectTypeDB::bind_method(_MD("set_post_solve_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_post_solve_func);
-    ObjectTypeDB::bind_method(_MD("set_separate_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_separate_func);
+    ClassDB::bind_method(D_METHOD("set_begin_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_begin_func);
+    ClassDB::bind_method(D_METHOD("set_pre_solve_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_pre_solve_func);
+    ClassDB::bind_method(D_METHOD("set_post_solve_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_post_solve_func);
+    ClassDB::bind_method(D_METHOD("set_separate_func", "receiver:Object", "method:StringName"), &ChipmunkCollisionHandler::set_separate_func);
 }
 
 bool ChipmunkCollisionHandler::BeginFunc(cpArbiter *arb, cpSpace *space, cpDataPointer userData)
@@ -133,6 +133,7 @@ bool ChipmunkCollisionHandler::BeginFunc(cpArbiter *arb, cpSpace *space, cpDataP
     auto *handler = get(space, userData);
     ERR_FAIL_NULL_V(handler->begin_cb, true);
     handler->begin_cb->call(memnew(ChipmunkArbiter(arb)));
+    return false;
 }
 
 bool ChipmunkCollisionHandler::PreSolveFunc(cpArbiter *arb, cpSpace *space, cpDataPointer userData)
@@ -140,6 +141,7 @@ bool ChipmunkCollisionHandler::PreSolveFunc(cpArbiter *arb, cpSpace *space, cpDa
     auto *handler = get(space, userData);
     ERR_FAIL_NULL_V(handler->pre_solve_cb, true);
     handler->pre_solve_cb->call(memnew(ChipmunkArbiter(arb)));
+    return false;
 }
 
 void ChipmunkCollisionHandler::PostSolveFunc(cpArbiter *arb, cpSpace *space, cpDataPointer userData)

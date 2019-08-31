@@ -1,11 +1,11 @@
 #ifndef GODOT_CHIPMUNK_COLLISION_HANDLER_H
 #define GODOT_CHIPMUNK_COLLISION_HANDLER_H
 
-#include <object.h>
+#include <core/object.h>
 
 class ChipmunkCollisionHandler : public Object
 {
-    OBJ_TYPE(ChipmunkCollisionHandler, Object);
+    GDCLASS(ChipmunkCollisionHandler, Object);
 private:
     /** Lifecycle */
     ChipmunkCollisionHandler(ChipmunkSpace*, cpCollisionHandler*);

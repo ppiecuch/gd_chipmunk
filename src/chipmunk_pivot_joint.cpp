@@ -30,13 +30,13 @@ void ChipmunkPivotJoint::set_anchor_b(const Vector2 &value)
 
 void ChipmunkPivotJoint::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("get_anchor_a"), &ChipmunkPivotJoint::get_anchor_a);
-    ObjectTypeDB::bind_method(_MD("set_anchor_a", "anchor:Vector2"), &ChipmunkPivotJoint::set_anchor_a);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_a"), _SCS("set_anchor_a"), _SCS("get_anchor_a"));
+    ClassDB::bind_method(D_METHOD("get_anchor_a"), &ChipmunkPivotJoint::get_anchor_a);
+    ClassDB::bind_method(D_METHOD("set_anchor_a", "anchor:Vector2"), &ChipmunkPivotJoint::set_anchor_a);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_a"), "set_anchor_a", "get_anchor_a");
 
-    ObjectTypeDB::bind_method(_MD("get_anchor_b"), &ChipmunkPivotJoint::get_anchor_b);
-    ObjectTypeDB::bind_method(_MD("set_anchor_b", "anchor:Vector2"), &ChipmunkPivotJoint::set_anchor_b);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_b"), _SCS("set_anchor_b"), _SCS("get_anchor_b"));
+    ClassDB::bind_method(D_METHOD("get_anchor_b"), &ChipmunkPivotJoint::get_anchor_b);
+    ClassDB::bind_method(D_METHOD("set_anchor_b", "anchor:Vector2"), &ChipmunkPivotJoint::set_anchor_b);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "anchor_b"), "set_anchor_b", "get_anchor_b");
 }
 
 ChipmunkPivotJoint *ChipmunkConstraintFactory::pivot_joint(ChipmunkBody *body_a, ChipmunkBody *body_b, const Vector2 &anchor_a, const Vector2 &anchor_b)

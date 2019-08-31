@@ -5,7 +5,7 @@
 ChipmunkConstraint::ChipmunkConstraint(cpConstraint *constraint)
     : constraint(constraint)
 {
-    cpConstraintSetUserData(constraint, get_instance_ID());
+    cpConstraintSetUserData(constraint, get_instance_id());
 }
 
 ChipmunkConstraint::~ChipmunkConstraint()
@@ -85,31 +85,31 @@ float ChipmunkConstraint::get_impulse() const
 
 void ChipmunkConstraint::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("get_space"), &ChipmunkConstraint::get_space);
+    ClassDB::bind_method(D_METHOD("get_space"), &ChipmunkConstraint::get_space);
 
-    ObjectTypeDB::bind_method(_MD("get_body_a"), &ChipmunkConstraint::get_body_a);
-    ObjectTypeDB::bind_method(_MD("get_body_b"), &ChipmunkConstraint::get_body_b);
+    ClassDB::bind_method(D_METHOD("get_body_a"), &ChipmunkConstraint::get_body_a);
+    ClassDB::bind_method(D_METHOD("get_body_b"), &ChipmunkConstraint::get_body_b);
 
-    ObjectTypeDB::bind_method(_MD("get_max_force"), &ChipmunkConstraint::get_max_force);
-    ObjectTypeDB::bind_method(_MD("set_max_force", "force:real"), &ChipmunkConstraint::set_max_force);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_force"), _SCS("set_max_force"), _SCS("get_max_force"));
+    ClassDB::bind_method(D_METHOD("get_max_force"), &ChipmunkConstraint::get_max_force);
+    ClassDB::bind_method(D_METHOD("set_max_force", "force:float"), &ChipmunkConstraint::set_max_force);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_force"), "set_max_force", "get_max_force");
 
-    ObjectTypeDB::bind_method(_MD("get_error_bias"), &ChipmunkConstraint::get_error_bias);
-    ObjectTypeDB::bind_method(_MD("set_error_bias", "bias:real"), &ChipmunkConstraint::set_error_bias);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "error_bias"), _SCS("set_error_bias"), _SCS("get_error_bias"));
+    ClassDB::bind_method(D_METHOD("get_error_bias"), &ChipmunkConstraint::get_error_bias);
+    ClassDB::bind_method(D_METHOD("set_error_bias", "bias:float"), &ChipmunkConstraint::set_error_bias);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "error_bias"), "set_error_bias", "get_error_bias");
 
-    ObjectTypeDB::bind_method(_MD("get_max_bias"), &ChipmunkConstraint::get_max_bias);
-    ObjectTypeDB::bind_method(_MD("set_max_bias", "bias:real"), &ChipmunkConstraint::set_max_bias);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_bias"), _SCS("set_max_bias"), _SCS("get_max_bias"));
+    ClassDB::bind_method(D_METHOD("get_max_bias"), &ChipmunkConstraint::get_max_bias);
+    ClassDB::bind_method(D_METHOD("set_max_bias", "bias:float"), &ChipmunkConstraint::set_max_bias);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_bias"), "set_max_bias", "get_max_bias");
 
-    ObjectTypeDB::bind_method(_MD("get_collide_bodies"), &ChipmunkConstraint::get_collide_bodies);
-    ObjectTypeDB::bind_method(_MD("set_collide_bodies", "collide:bool"), &ChipmunkConstraint::set_collide_bodies);
-    ADD_PROPERTY(PropertyInfo(Variant::BOOL, "collide_bodies"), _SCS("set_collide_bodies"), _SCS("get_collide_bodies"));
+    ClassDB::bind_method(D_METHOD("get_collide_bodies"), &ChipmunkConstraint::get_collide_bodies);
+    ClassDB::bind_method(D_METHOD("set_collide_bodies", "collide:bool"), &ChipmunkConstraint::set_collide_bodies);
+    ADD_PROPERTY(PropertyInfo(Variant::BOOL, "collide_bodies"), "set_collide_bodies", "get_collide_bodies");
 
-    ObjectTypeDB::bind_method(_MD("get_metadata"), &ChipmunkConstraint::get_metadata);
-    ObjectTypeDB::bind_method(_MD("set_metadata", "metadata:Variant"), &ChipmunkConstraint::set_metadata);
+    ClassDB::bind_method(D_METHOD("get_metadata"), &ChipmunkConstraint::get_metadata);
+    ClassDB::bind_method(D_METHOD("set_metadata", "metadata:Variant"), &ChipmunkConstraint::set_metadata);
 
-    ObjectTypeDB::bind_method(_MD("get_impulse"), &ChipmunkConstraint::get_impulse);
+    ClassDB::bind_method(D_METHOD("get_impulse"), &ChipmunkConstraint::get_impulse);
 }
 
 ChipmunkConstraint *ChipmunkConstraint::get(const cpConstraint *constraint)
@@ -120,7 +120,7 @@ ChipmunkConstraint *ChipmunkConstraint::get(const cpConstraint *constraint)
 
 void ChipmunkConstraintFactory::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("pin_joint:ChipmunkPinJoint", "body_a:ChipmunkBody", "body_b:ChipmunkBody", "anchor_a:Vector2", "anchor_b:Vector2"), &ChipmunkConstraintFactory::pin_joint);
-    ObjectTypeDB::bind_method(_MD("pivot_joint:ChipmunkPinJoint", "body_a:ChipmunkBody", "body_b:ChipmunkBody", "anchor_a:Vector2", "anchor_b:Vector2"), &ChipmunkConstraintFactory::pivot_joint);
-    ObjectTypeDB::bind_method(_MD("damped_spring:ChipmunkDampedSpring", "body_a:ChipmunkBody", "body_b:ChipmunkBody", "anchor_a:Vector2", "anchor_b:Vector2"), &ChipmunkConstraintFactory::damped_spring);
+    ClassDB::bind_method(D_METHOD("pin_joint:ChipmunkPinJoint", "body_a:ChipmunkBody", "body_b:ChipmunkBody", "anchor_a:Vector2", "anchor_b:Vector2"), &ChipmunkConstraintFactory::pin_joint);
+    ClassDB::bind_method(D_METHOD("pivot_joint:ChipmunkPinJoint", "body_a:ChipmunkBody", "body_b:ChipmunkBody", "anchor_a:Vector2", "anchor_b:Vector2"), &ChipmunkConstraintFactory::pivot_joint);
+    ClassDB::bind_method(D_METHOD("damped_spring:ChipmunkDampedSpring", "body_a:ChipmunkBody", "body_b:ChipmunkBody", "anchor_a:Vector2", "anchor_b:Vector2"), &ChipmunkConstraintFactory::damped_spring);
 }

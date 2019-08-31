@@ -6,7 +6,7 @@ ChipmunkBody::ChipmunkBody()
     : position_cb(0), velocity_cb(0)
 {
     body = cpBodyNew(0, 0);
-    cpBodySetUserData(body, get_instance_ID());
+    cpBodySetUserData(body, get_instance_id());
 }
 
 ChipmunkBody::~ChipmunkBody()
@@ -159,7 +159,7 @@ void ChipmunkBody::set_velocity_update_callback(Object *receiver, const StringNa
     if (receiver)
     {
         velocity_cb = memnew(ChipmunkCallbackBinding);
-        velocity_cb->id = receiver->get_instance_ID();
+        velocity_cb->id = receiver->get_instance_id();
         velocity_cb->method = method;
         cpBodySetVelocityUpdateFunc(body, VelocityUpdateFunc);
     }
@@ -173,7 +173,7 @@ void ChipmunkBody::set_position_update_callback(Object *receiver, const StringNa
     if (receiver)
     {
         position_cb = memnew(ChipmunkCallbackBinding);
-        position_cb->id = receiver->get_instance_ID();
+        position_cb->id = receiver->get_instance_id();
         position_cb->method = method;
         cpBodySetPositionUpdateFunc(body, PositionUpdateFunc);
     }
@@ -264,77 +264,77 @@ Array ChipmunkBody::get_arbiters() const
 
 void ChipmunkBody::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("activate"), &ChipmunkBody::activate);
-    ObjectTypeDB::bind_method(_MD("sleep"), &ChipmunkBody::sleep);
-    ObjectTypeDB::bind_method(_MD("is_sleeping"), &ChipmunkBody::is_sleeping);
+    ClassDB::bind_method(D_METHOD("activate"), &ChipmunkBody::activate);
+    ClassDB::bind_method(D_METHOD("sleep"), &ChipmunkBody::sleep);
+    ClassDB::bind_method(D_METHOD("is_sleeping"), &ChipmunkBody::is_sleeping);
 
-    ObjectTypeDB::bind_method(_MD("get_body_type"), &ChipmunkBody::get_body_type);
-    ObjectTypeDB::bind_method(_MD("set_body_type", "type:int"), &ChipmunkBody::set_body_type);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "body_type"), _SCS("set_body_type"), _SCS("get_body_type"));
+    ClassDB::bind_method(D_METHOD("get_body_type"), &ChipmunkBody::get_body_type);
+    ClassDB::bind_method(D_METHOD("set_body_type", "type:int"), &ChipmunkBody::set_body_type);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "body_type"), "set_body_type", "get_body_type");
 
-    ObjectTypeDB::bind_method(_MD("get_space"), &ChipmunkBody::get_space);
+    ClassDB::bind_method(D_METHOD("get_space"), &ChipmunkBody::get_space);
 
-    ObjectTypeDB::bind_method(_MD("get_mass"), &ChipmunkBody::get_mass);
-    ObjectTypeDB::bind_method(_MD("set_mass", "mass:real"), &ChipmunkBody::set_mass);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "mass"), _SCS("set_mass"), _SCS("get_mass"));
+    ClassDB::bind_method(D_METHOD("get_mass"), &ChipmunkBody::get_mass);
+    ClassDB::bind_method(D_METHOD("set_mass", "mass:float"), &ChipmunkBody::set_mass);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "mass"), "set_mass", "get_mass");
 
-    ObjectTypeDB::bind_method(_MD("get_moment"), &ChipmunkBody::get_moment);
-    ObjectTypeDB::bind_method(_MD("set_moment", "moment:real"), &ChipmunkBody::set_moment);
-    ObjectTypeDB::bind_method(_MD("set_moment_to_infinity"), &ChipmunkBody::set_moment_to_infinity);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "moment"), _SCS("set_moment"), _SCS("get_moment"));
+    ClassDB::bind_method(D_METHOD("get_moment"), &ChipmunkBody::get_moment);
+    ClassDB::bind_method(D_METHOD("set_moment", "moment:float"), &ChipmunkBody::set_moment);
+    ClassDB::bind_method(D_METHOD("set_moment_to_infinity"), &ChipmunkBody::set_moment_to_infinity);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "moment"), "set_moment", "get_moment");
 
-    ObjectTypeDB::bind_method(_MD("get_position"), &ChipmunkBody::get_position);
-    ObjectTypeDB::bind_method(_MD("set_position", "position:Vector2"), &ChipmunkBody::set_position);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "position"), _SCS("set_position"), _SCS("get_position"));
+    ClassDB::bind_method(D_METHOD("get_position"), &ChipmunkBody::get_position);
+    ClassDB::bind_method(D_METHOD("set_position", "position:Vector2"), &ChipmunkBody::set_position);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "position"), "set_position", "get_position");
 
-    ObjectTypeDB::bind_method(_MD("get_center_of_gravity"), &ChipmunkBody::get_center_of_gravity);
-    ObjectTypeDB::bind_method(_MD("set_center_of_gravity", "center_of_gravity:Vector2"), &ChipmunkBody::set_center_of_gravity);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "center_of_gravity"), _SCS("set_center_of_gravity"), _SCS("get_center_of_gravity"));
+    ClassDB::bind_method(D_METHOD("get_center_of_gravity"), &ChipmunkBody::get_center_of_gravity);
+    ClassDB::bind_method(D_METHOD("set_center_of_gravity", "center_of_gravity:Vector2"), &ChipmunkBody::set_center_of_gravity);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "center_of_gravity"), "set_center_of_gravity", "get_center_of_gravity");
 
-    ObjectTypeDB::bind_method(_MD("get_velocity"), &ChipmunkBody::get_velocity);
-    ObjectTypeDB::bind_method(_MD("set_velocity", "velocity:Vector2"), &ChipmunkBody::set_velocity);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "velocity"), _SCS("set_velocity"), _SCS("get_velocity"));
+    ClassDB::bind_method(D_METHOD("get_velocity"), &ChipmunkBody::get_velocity);
+    ClassDB::bind_method(D_METHOD("set_velocity", "velocity:Vector2"), &ChipmunkBody::set_velocity);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "velocity"), "set_velocity", "get_velocity");
 
-    ObjectTypeDB::bind_method(_MD("get_force"), &ChipmunkBody::get_force);
-    ObjectTypeDB::bind_method(_MD("set_force", "force:Vector2"), &ChipmunkBody::set_force);
-    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "force"), _SCS("set_force"), _SCS("get_force"));
+    ClassDB::bind_method(D_METHOD("get_force"), &ChipmunkBody::get_force);
+    ClassDB::bind_method(D_METHOD("set_force", "force:Vector2"), &ChipmunkBody::set_force);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "force"), "set_force", "get_force");
 
-    ObjectTypeDB::bind_method(_MD("get_angle"), &ChipmunkBody::get_angle);
-    ObjectTypeDB::bind_method(_MD("set_angle", "angle:real"), &ChipmunkBody::set_angle);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "angle"), _SCS("set_angle"), _SCS("get_angle"));
+    ClassDB::bind_method(D_METHOD("get_angle"), &ChipmunkBody::get_angle);
+    ClassDB::bind_method(D_METHOD("set_angle", "angle:float"), &ChipmunkBody::set_angle);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "angle"), "set_angle", "get_angle");
 
-    ObjectTypeDB::bind_method(_MD("get_angular_velocity"), &ChipmunkBody::get_angular_velocity);
-    ObjectTypeDB::bind_method(_MD("set_angular_velocity", "angular_velocity:real"), &ChipmunkBody::set_angular_velocity);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "angular_velocity"), _SCS("set_angular_velocity"), _SCS("get_angular_velocity"));
+    ClassDB::bind_method(D_METHOD("get_angular_velocity"), &ChipmunkBody::get_angular_velocity);
+    ClassDB::bind_method(D_METHOD("set_angular_velocity", "angular_velocity:float"), &ChipmunkBody::set_angular_velocity);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "angular_velocity"), "set_angular_velocity", "get_angular_velocity");
 
-    ObjectTypeDB::bind_method(_MD("get_torque"), &ChipmunkBody::get_torque);
-    ObjectTypeDB::bind_method(_MD("set_torque", "torque:real"), &ChipmunkBody::set_torque);
-    ADD_PROPERTY(PropertyInfo(Variant::REAL, "torque"), _SCS("set_torque"), _SCS("get_torque"));
+    ClassDB::bind_method(D_METHOD("get_torque"), &ChipmunkBody::get_torque);
+    ClassDB::bind_method(D_METHOD("set_torque", "torque:float"), &ChipmunkBody::set_torque);
+    ADD_PROPERTY(PropertyInfo(Variant::REAL, "torque"), "set_torque", "get_torque");
 
-    ObjectTypeDB::bind_method(_MD("get_metadata"), &ChipmunkBody::get_metadata);
-    ObjectTypeDB::bind_method(_MD("set_metadata", "metadata:Variant"), &ChipmunkBody::set_metadata);
+    ClassDB::bind_method(D_METHOD("get_metadata"), &ChipmunkBody::get_metadata);
+    ClassDB::bind_method(D_METHOD("set_metadata", "metadata:Variant"), &ChipmunkBody::set_metadata);
 
-    ObjectTypeDB::bind_method(_MD("set_velocity_update_callback", "receiver:Object", "method:StringName"), &ChipmunkBody::set_velocity_update_callback);
-    ObjectTypeDB::bind_method(_MD("set_position_update_callback", "receiver:Object", "method:StringName"), &ChipmunkBody::set_position_update_callback);
+    ClassDB::bind_method(D_METHOD("set_velocity_update_callback", "receiver:Object", "method:StringName"), &ChipmunkBody::set_velocity_update_callback);
+    ClassDB::bind_method(D_METHOD("set_position_update_callback", "receiver:Object", "method:StringName"), &ChipmunkBody::set_position_update_callback);
 
-    ObjectTypeDB::bind_method(_MD("apply_force_at_world_point", "force:Vector2", "point:Vector2"), &ChipmunkBody::apply_force_at_world_point);
-    ObjectTypeDB::bind_method(_MD("apply_force_at_local_point", "force:Vector2", "point:Vector2"), &ChipmunkBody::apply_force_at_local_point);
+    ClassDB::bind_method(D_METHOD("apply_force_at_world_point", "force:Vector2", "point:Vector2"), &ChipmunkBody::apply_force_at_world_point);
+    ClassDB::bind_method(D_METHOD("apply_force_at_local_point", "force:Vector2", "point:Vector2"), &ChipmunkBody::apply_force_at_local_point);
 
-    ObjectTypeDB::bind_method(_MD("apply_impulse_at_world_point", "impulse:Vector2", "point:Vector2"), &ChipmunkBody::apply_impulse_at_world_point);
-    ObjectTypeDB::bind_method(_MD("apply_impulse_at_local_point", "impulse:Vector2", "point:Vector2"), &ChipmunkBody::apply_impulse_at_local_point);
+    ClassDB::bind_method(D_METHOD("apply_impulse_at_world_point", "impulse:Vector2", "point:Vector2"), &ChipmunkBody::apply_impulse_at_world_point);
+    ClassDB::bind_method(D_METHOD("apply_impulse_at_local_point", "impulse:Vector2", "point:Vector2"), &ChipmunkBody::apply_impulse_at_local_point);
 
-    ObjectTypeDB::bind_method(_MD("get_velocity_at_world_point", "point:Vector2"), &ChipmunkBody::get_velocity_at_world_point);
-    ObjectTypeDB::bind_method(_MD("get_velocity_at_local_point", "point:Vector2"), &ChipmunkBody::get_velocity_at_local_point);
+    ClassDB::bind_method(D_METHOD("get_velocity_at_world_point", "point:Vector2"), &ChipmunkBody::get_velocity_at_world_point);
+    ClassDB::bind_method(D_METHOD("get_velocity_at_local_point", "point:Vector2"), &ChipmunkBody::get_velocity_at_local_point);
 
-    ObjectTypeDB::bind_method(_MD("get_kinetic_energy"), &ChipmunkBody::get_kinetic_energy);
+    ClassDB::bind_method(D_METHOD("get_kinetic_energy"), &ChipmunkBody::get_kinetic_energy);
 
-    ObjectTypeDB::bind_method(_MD("get_shapes:Array"), &ChipmunkBody::get_shapes);
-    ObjectTypeDB::bind_method(_MD("get_constraints:Array"), &ChipmunkBody::get_constraints);
-    ObjectTypeDB::bind_method(_MD("get_arbiters:Array"), &ChipmunkBody::get_arbiters);
+    ClassDB::bind_method(D_METHOD("get_shapes:Array"), &ChipmunkBody::get_shapes);
+    ClassDB::bind_method(D_METHOD("get_constraints:Array"), &ChipmunkBody::get_constraints);
+    ClassDB::bind_method(D_METHOD("get_arbiters:Array"), &ChipmunkBody::get_arbiters);
 
-    ObjectTypeDB::bind_integer_constant(get_type_static(), "DYNAMIC", CP_BODY_TYPE_DYNAMIC);
-    ObjectTypeDB::bind_integer_constant(get_type_static(), "KINEMATIC", CP_BODY_TYPE_KINEMATIC);
-    ObjectTypeDB::bind_integer_constant(get_type_static(), "STATIC", CP_BODY_TYPE_STATIC);
+    ClassDB::bind_integer_constant(get_class_static(), StringName(), "DYNAMIC", CP_BODY_TYPE_DYNAMIC);
+    ClassDB::bind_integer_constant(get_class_static(), StringName(), "KINEMATIC", CP_BODY_TYPE_KINEMATIC);
+    ClassDB::bind_integer_constant(get_class_static(), StringName(), "STATIC", CP_BODY_TYPE_STATIC);
 
     BIND_CONSTANT(CP_BODY_TYPE_DYNAMIC);
     BIND_CONSTANT(CP_BODY_TYPE_KINEMATIC);

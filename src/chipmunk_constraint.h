@@ -1,11 +1,11 @@
 #ifndef GODOT_CHIPMUNK_CONSTRAINT_H
 #define GODOT_CHIPMUNK_CONSTRAINT_H
 
-#include <object.h>
+#include <core/object.h>
 
 class ChipmunkConstraint : public Object
 {
-    OBJ_TYPE(ChipmunkConstraint, Object);
+    GDCLASS(ChipmunkConstraint, Object);
 protected:
     /** Abstract class */
     ChipmunkConstraint(cpConstraint*);
@@ -51,7 +51,7 @@ public:
 
 class ChipmunkConstraintFactory : public Reference
 {
-    OBJ_TYPE(ChipmunkConstraintFactory, Reference);
+    GDCLASS(ChipmunkConstraintFactory, Reference);
 public:
     /** Factory methods */
     class ChipmunkPinJoint *pin_joint(ChipmunkBody *body_a, ChipmunkBody *body_b, const Vector2 &anchor_a, const Vector2 &anchor_b);

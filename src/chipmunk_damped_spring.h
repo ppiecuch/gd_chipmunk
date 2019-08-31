@@ -5,7 +5,7 @@
 
 class ChipmunkDampedSpring : public ChipmunkConstraint
 {
-    OBJ_TYPE(ChipmunkDampedSpring, ChipmunkConstraint);
+    GDCLASS(ChipmunkDampedSpring, ChipmunkConstraint);
 protected:
     /** Abstract class */
     ChipmunkDampedSpring(cpConstraint*);

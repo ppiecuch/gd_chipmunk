@@ -5,7 +5,7 @@
 
 class ChipmunkPivotJoint : public ChipmunkConstraint
 {
-    OBJ_TYPE(ChipmunkPivotJoint, ChipmunkConstraint);
+    GDCLASS(ChipmunkPivotJoint, ChipmunkConstraint);
 protected:
     /** Abstract class */
     ChipmunkPivotJoint(cpConstraint*);

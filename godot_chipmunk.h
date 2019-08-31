@@ -1,8 +1,8 @@
 #ifndef GODOT_CHIPMUNK_H
 #define GODOT_CHIPMUNK_H
 
-#include <object.h>
-#include <reference.h>
+#include <core/object.h>
+#include <core/reference.h>
 
 #include <chipmunk/chipmunk.h>
 
@@ -27,7 +27,7 @@ struct VariantCaster<O*>
 	static O *cast(const Variant &p_variant)
     {
         auto *obj = (Object*)p_variant;
-        return obj ? obj->cast_to<O>() : NULL;
+        return obj ? Object::cast_to<O>(obj) : NULL;
 	}
 };
 
@@ -36,7 +36,7 @@ struct VariantCaster<O*>
  **********************************************************************/
 class ChipmunkShapeFilter : public Reference
 {
-    OBJ_TYPE(ChipmunkShapeFilter, Reference);
+    GDCLASS(ChipmunkShapeFilter, Reference);
 public:
     /** Lifecycle */
     ChipmunkShapeFilter();
@@ -72,15 +72,15 @@ public:
  * 2D Math interoperability
  **********************************************************************/
 static inline cpVect CP(const Vector2 &v) { return cpv(v.x, v.y); }
-static inline cpBB CP(const Rect2 &v) { return cpBBNew(v.pos.x, v.pos.y, v.pos.x + v.size.x, v.pos.y + v.size.y); }
+static inline cpBB CP(const Rect2 &v) { return cpBBNew(v.position.x, v.position.y, v.position.x + v.size.x, v.position.y + v.size.y); }
 
-static inline cpTransform CP(const Matrix32 &v)
+static inline cpTransform CP(const Transform2D &v)
 {
     return cpTransform
     {
-        v.elements[0].x, v.elements[0].y,
-        v.elements[1].x, v.elements[1].y,
-        v.elements[2].x, v.elements[2].y
+        v[0].x, v.elements[0].y,
+        v[1].x, v.elements[1].y,
+        v[2].x, v.elements[2].y
     };
 }
 
@@ -92,9 +92,9 @@ static inline cpShapeFilter CP(const Ref<ChipmunkShapeFilter> &v)
 static inline Vector2 GD(const cpVect &v) { return Vector2(v.x, v.y); }
 static inline Rect2 GD(const cpBB &v) { return Rect2(v.l, v.b, v.r - v.l, v.t - v.b); }
 
-static inline Matrix32 GD(const cpTransform &v)
+static inline Transform2D GD(const cpTransform &v)
 {
-    return Matrix32(v.a, v.b, v.c, v.d, v.tx, v.ty);
+    return Transform2D(v.a, v.b, v.c, v.d, v.tx, v.ty);
 }
 
 /***********************************************************************

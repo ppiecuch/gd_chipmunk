@@ -5,7 +5,7 @@
 
 class ChipmunkPinJoint : public ChipmunkConstraint
 {
-    OBJ_TYPE(ChipmunkPinJoint, ChipmunkConstraint);
+    GDCLASS(ChipmunkPinJoint, ChipmunkConstraint);
 protected:
     /** Abstract class */
     ChipmunkPinJoint(cpConstraint*);

@@ -50,7 +50,7 @@ env_chipmunk.Append(CPPFLAGS=["-DCP_USE_DOUBLES=0", "-DCP_SPACE_DISABLE_DEBUG_AP
 env_chipmunk.Append(CXXFLAGS=['-std=c++11'])
 
 # Compile as a static library
-lib = env_chipmunk.Library("chipmunk", sources)
+lib = env_chipmunk.Library("gd_chipmunk", sources)
 
 # Add the library as a dependency of the final executable
 env.Prepend(LIBS=[lib])

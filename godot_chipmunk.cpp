@@ -67,15 +67,15 @@ ChipmunkShapeFilter::ChipmunkShapeFilter(const cpShapeFilter &cp)
 
 void ChipmunkShapeFilter::_bind_methods()
 {
-    ObjectTypeDB::bind_method(_MD("set_group", "group"), &ChipmunkShapeFilter::set_group);
-    ObjectTypeDB::bind_method(_MD("get_group"), &ChipmunkShapeFilter::get_group);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "group"), _SCS("set_group"), _SCS("get_group"));
+    ClassDB::bind_method(D_METHOD("set_group", "group"), &ChipmunkShapeFilter::set_group);
+    ClassDB::bind_method(D_METHOD("get_group"), &ChipmunkShapeFilter::get_group);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "group"), "set_group", "get_group");
 
-    ObjectTypeDB::bind_method(_MD("set_categories", "categories"), &ChipmunkShapeFilter::set_categories);
-    ObjectTypeDB::bind_method(_MD("get_categories"), &ChipmunkShapeFilter::get_categories);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "categories"), _SCS("set_categories"), _SCS("get_categories"));
+    ClassDB::bind_method(D_METHOD("set_categories", "categories"), &ChipmunkShapeFilter::set_categories);
+    ClassDB::bind_method(D_METHOD("get_categories"), &ChipmunkShapeFilter::get_categories);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "categories"), "set_categories", "get_categories");
 
-    ObjectTypeDB::bind_method(_MD("set_mask", "mask"), &ChipmunkShapeFilter::set_mask);
-    ObjectTypeDB::bind_method(_MD("get_mask"), &ChipmunkShapeFilter::get_mask);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "mask"), _SCS("set_mask"), _SCS("get_mask"));
+    ClassDB::bind_method(D_METHOD("set_mask", "mask"), &ChipmunkShapeFilter::set_mask);
+    ClassDB::bind_method(D_METHOD("get_mask"), &ChipmunkShapeFilter::get_mask);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "mask"), "set_mask", "get_mask");
 }
