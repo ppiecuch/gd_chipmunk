@@ -10,9 +10,6 @@ void register_gd_chipmunk_types()
 {
     print_line(String("Chipmunk version: ") + String(cpVersionString));
 
-    // initialize server
-    //memnew(ChipmunkServer);
-
     // register auxiliary types
     ClassDB::register_class<ChipmunkSpace>();
     ClassDB::register_class<ChipmunkBody>();
@@ -31,13 +28,8 @@ void register_gd_chipmunk_types()
 
     // Little hack
     ClassDB::bind_method(D_METHOD("set_block_transform_notify", "enable:bool"), &CanvasItem::set_block_transform_notify);
-
-    // register server
-    //Globals::get_singleton()->add_singleton(Globals::Singleton("ChipmunkServer", ChipmunkServer::get_singleton()));
 }
 
 void unregister_gd_chipmunk_types()
 {
-    // destroy server
-    //memdelete(ChipmunkServer::get_singleton());
 }
