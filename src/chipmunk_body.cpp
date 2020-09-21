@@ -3,7 +3,7 @@
 #include "chipmunk_body.h"
 
 ChipmunkBody::ChipmunkBody()
-    : position_cb(0), velocity_cb(0)
+    : velocity_cb(0), position_cb(0)
 {
     body = cpBodyNew(0, 0);
     cpBodySetUserData(body, get_instance_id());

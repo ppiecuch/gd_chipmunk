@@ -1,7 +1,10 @@
 #!/usr/bin/env python
+import os
 
-Import('env')
-Import('env_modules')
+Import("env")
+Import("env_modules")
+
+module = os.path.splitext(os.path.basename(os.path.realpath(".")))[0]
 
 env_module = env_modules.Clone()
 
@@ -39,7 +42,7 @@ sources += [
     "lib/src/cpSpaceQuery.c",
     "lib/src/cpSpaceStep.c",
     "lib/src/cpSpatialIndex.c",
-    "lib/src/cpSweep1D.c"
+    "lib/src/cpSweep1D.c",
 ]
 
 # Chipmunk include path
@@ -49,7 +52,7 @@ env_module.Append(CPPPATH=[".", "lib/include"])
 env_module.Append(CPPFLAGS=["-DCP_USE_DOUBLES=0", "-DCP_SPACE_DISABLE_DEBUG_API"])
 
 # Compile as a static library
-lib = env_module.Library("gd_chipmunk", sources)
+lib = env_module.Library(module, sources)
 
 # Add the library as a dependency of the final executable
 env.Prepend(LIBS=[lib])

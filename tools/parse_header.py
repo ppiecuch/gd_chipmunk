@@ -3,7 +3,16 @@ import re
 import sys
 
 # build a list of ignored functions
-ignoredPatterns = ["_init$", "_alloc$", "_destroy$", "_user_data$", "_each_", "_func$", "_debug_", "^space_get_static_body$"]
+ignoredPatterns = [
+    "_init$",
+    "_alloc$",
+    "_destroy$",
+    "_user_data$",
+    "_each_",
+    "_func$",
+    "_debug_",
+    "^space_get_static_body$",
+]
 ignoredPatterns = [re.compile(p) for p in ignoredPatterns]
 
 # type conversion map
@@ -18,7 +27,7 @@ datatypes = {
     "cpBodyType": "int",
     "int": "int",
     "cpTimestamp": "int",
-    "cpBB": "Rect2"
+    "cpBB": "Rect2",
 }
 
 resourcetypes = ["cpBody", "cpSpace", "cpShape", "cpConstraint"]
@@ -27,16 +36,20 @@ mathTypes = ["cpVect", "cpTransform", "cpBB"]
 
 # Helper functions
 def snake_case(name):
-    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
-    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+    s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
+    return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
+
 
 def parse_param(s):
     s = s.strip()
-    if s == "void": return None
+    if s == "void":
+        return None
     return tuple([x.strip() for x in s.split()])
+
 
 def validate_type(t):
     return t in datatypes or t in resourcetypes
+
 
 def parse_function(sig):
     # clean-up the string
@@ -58,11 +71,11 @@ def parse_function(sig):
         return None
 
     # found a good candidate
-    #print funcName
-    
+    # print funcName
+
     # parse parameters
     params = filter(None, map(parse_param, params))
-    
+
     # validate them
     for param in params:
         # check type
@@ -70,7 +83,7 @@ def parse_function(sig):
             print "Unknown param type: ", param[0]
             print "> In function: ", funcName
             return None
-    
+
     # validate return type
     if returnType != "void" and not validate_type(returnType):
         print "Unknown return type: ", returnType
@@ -79,6 +92,7 @@ def parse_function(sig):
 
     return returnType, funcName, params, originalName
 
+
 def convert_type(t):
     if t == "void":
         return t
@@ -86,14 +100,17 @@ def convert_type(t):
         return "RID"
     return datatypes[t]
 
-def gen_func_signature(func, with_class = False):
+
+def gen_func_signature(func, with_class=False):
     returnType, name, params, _ = func
     sig = convert_type(returnType) + " "
-    if with_class: sig += "ChipmunkServer::"
+    if with_class:
+        sig += "ChipmunkServer::"
     sig += name + "("
     params = [convert_type(t) + " p_" + n for t, n in params]
     sig += ",".join(params).replace(",", ", ") + ")"
     return sig
+
 
 def gen_func_definition(func):
     returnType, name, params, originalName = func
@@ -122,14 +139,16 @@ def gen_func_definition(func):
         body += "\treturn {0}({1});\n".format(originalName, args)
     return sig + body + "}"
 
+
 def gen_func_binding(func):
     returnType, name, params, _ = func
     bind = "ObjectTypeDB::bind_method(_MD("
-    bind += "\"{0}\"".format(name)
+    bind += '"{0}"'.format(name)
     for param in params:
-        bind += ", \"{0}\"".format(param[1])
+        bind += ', "{0}"'.format(param[1])
     bind += "), &ChipmunkServer::{0});".format(name)
     return bind
+
 
 # read file
 fname = sys.argv[1]

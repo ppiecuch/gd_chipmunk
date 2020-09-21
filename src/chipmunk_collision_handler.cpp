@@ -3,8 +3,8 @@
 #include "chipmunk_collision_handler.h"
 
 ChipmunkCollisionHandler::ChipmunkCollisionHandler(ChipmunkSpace *space, cpCollisionHandler *handler)
-    : begin_cb(0), pre_solve_cb(0), post_solve_cb(0), separate_cb(0),
-    space(space), handler(handler), default_handler(*handler)
+    : default_handler(*handler), handler(handler), space(space)
+	, begin_cb(0), pre_solve_cb(0), post_solve_cb(0), separate_cb(0)
 {
 }
 
